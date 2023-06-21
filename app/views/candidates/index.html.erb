@@ -13,7 +13,7 @@
       <tr>
         <td><%= link_to candidate.name, campaign_candidate_path(candidate.campaign, candidate) %></td>
         <td><%= candidate.votes.count  %></td>
-        <td><%= "messages" %></td>
+        <td><%= @failed_votes %></td>
       </tr>
     <% end %>
   </tbody>

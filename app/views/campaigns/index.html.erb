@@ -1,5 +1,6 @@
 <h1>Campaigns</h1>
-<%= button_to "Import Votes", import_votes_path, method: :post %>
+<%= button_to "Import Votes", import_votes_path, method: :post if Vote.count == 0 %>
+ <h2>Invalid Votes: <%= @invalid_votes %></h2>
 <table>
   <thead>
     <tr>
