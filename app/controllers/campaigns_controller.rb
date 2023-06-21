@@ -1,8 +1,9 @@
 class CampaignsController < ApplicationController
   before_action :set_campaign, only: [:show]
-  # require_relative '../lib/tasks/import_votes.rb'
   def index
     @campaigns = Campaign.all
+    total_votes = count_lines('public/votes.txt')
+    @invalid_votes = total_votes - Vote.count
   end
 
   def show
@@ -60,5 +61,11 @@ class CampaignsController < ApplicationController
         end
       end
     end
+  end
+
+  def count_lines(file_path)
+    line_count = 0
+    File.foreach(file_path) { line_count += 1 }
+    line_count
   end
 end
