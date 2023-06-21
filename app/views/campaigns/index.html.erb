@@ -1,0 +1,16 @@
+<h1>Campaigns</h1>
+<%= button_to "Import Votes", import_votes_path, method: :post %>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @campaigns.each do |campaign| %>
+      <tr>
+        <td><%= link_to campaign.name, campaign_candidates_path(campaign)  %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,20 @@
+<h1>Candidates</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Score</th>
+      <th>Messages </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @candidates.each do |candidate| %>
+      <tr>
+        <td><%= link_to candidate.name, campaign_candidate_path(candidate.campaign, candidate) %></td>
+        <td><%= candidate.votes.count  %></td>
+        <td><%= "messages" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
