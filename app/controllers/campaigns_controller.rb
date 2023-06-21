@@ -10,7 +10,15 @@ class CampaignsController < ApplicationController
   end
 
   def import_votes
-    import_log_data('public/votes.txt')
+    # I thought it will be a nice addition to be able to upload the file through the form
+    file = params[:file]
+    if file.content_type != 'text/plain'
+      flash[:error] = 'Only text files (.txt) are allowed.'
+      redirect_to campaign_path(params[:id])
+      return
+    end
+
+    import_log_data(file.tempfile.path)
   end
   private
 
