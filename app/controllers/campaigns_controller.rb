@@ -5,8 +5,7 @@ class CampaignsController < ApplicationController
     @invalid_votes = VoteCount.last&.invalid_vote
   end
 
-  def show
-  end
+  def show; end
 
   def import_votes
     # I thought it will be a nice addition to be able to upload the file through the form
