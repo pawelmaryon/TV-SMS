@@ -12,9 +12,8 @@ module Services
           end
 
           begin
-            line_regex = /(VOTE|DEFAULT) (\d+) Campaign:([^ ]+) Validity:([^ ]+) Choice:([^ ]+) CONN:([^ ]+) MSISDN:([^ ]+) GUID:([^ ]+) Shortcode:(\d+)/
+            line_regex = /(VOTE|DEFAULT) (\d+) Campaign:([^ ]+)(?: Validity:([^ ]+))? Choice:([^ ]+) CONN:([^ ]+) MSISDN:([^ ]+) GUID:([^ ]+) Shortcode:(\d+)/
             matches = line.match(line_regex)
-
             next unless matches
 
             campaign_name = matches[2]

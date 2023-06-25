@@ -8,23 +8,22 @@ class VoteImport
           puts "Skipping line due to invalid byte sequence: #{e.message}"
           next
         end
-  
+
         begin
-          line_regex = /VOTE (\d+) Campaign:([^ ]+) Validity:([^ ]+) Choice:([^ ]+) CONN:([^ ]+) MSISDN:([^ ]+) GUID:([^ ]+) Shortcode:(\d+)/
+          line_regex = /(VOTE|DEFAULT) (\d+) Campaign:([^ ]+)(?: Validity:([^ ]+))?(?: Choice:([^ ]+))? CONN:([^ ]+) MSISDN:([^ ]+) GUID:([^ ]+) Shortcode:(\d+)/
           matches = line.match(line_regex)
-  
           next unless matches
-  
-          campaign_name = matches[2]
-          validity = matches[3]
-          choice = matches[4]
-          conn = matches[5]
-          msisdn = matches[6]
-          guid = matches[7]
-          shortcode = matches[8]
-  
+          byebug
+          campaign_name = matches[3]
+          validity = matches[4]
+          choice = matches[5]
+          conn = matches[6]
+          msisdn = matches[7]
+          guid = matches[8]
+          shortcode = matches[9]
+
           campaign = Campaign.find_or_create_by(name: campaign_name)
-  
+
           candidate = Candidate.find_or_initialize_by(name: choice, campaign: campaign)
           candidate.save!
           Vote.create!(
