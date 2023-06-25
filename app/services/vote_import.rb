@@ -13,7 +13,6 @@ class VoteImport
           line_regex = /(VOTE|DEFAULT) (\d+) Campaign:([^ ]+)(?: Validity:([^ ]+))?(?: Choice:([^ ]+))? CONN:([^ ]+) MSISDN:([^ ]+) GUID:([^ ]+) Shortcode:(\d+)/
           matches = line.match(line_regex)
           next unless matches
-          byebug
           campaign_name = matches[3]
           validity = matches[4]
           choice = matches[5]
@@ -22,7 +21,7 @@ class VoteImport
           guid = matches[8]
           shortcode = matches[9]
 
-          campaign = Campaign.find_or_create_by(name: campaign_name)
+          campaign = Campaign.find_or_create_by(name: campaign_name, shortcode: shortcode)
 
           candidate = Candidate.find_or_initialize_by(name: choice, campaign: campaign)
           candidate.save!

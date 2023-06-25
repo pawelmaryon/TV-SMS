@@ -24,7 +24,7 @@ module Services
             guid = matches[7]
             shortcode = matches[8]
 
-            campaign = Campaign.find_or_create_by(name: campaign_name)
+            campaign = Campaign.find_or_create_by(name: campaign_name, shortcode: shortcode )
 
             candidate = Candidate.find_or_initialize_by(name: choice, campaign: campaign)
             candidate.save!

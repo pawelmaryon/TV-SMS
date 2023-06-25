@@ -1,5 +1,21 @@
 <h1><%= @campaign.name %></h1>
+<h2>Invalid Votes: <%= @campaign.votes.where(validity: nil)&.count %></h2>
 
-<p>Description: <%= @campaign.description %></p>
-<p>Start Date: <%= @campaign.start_date %></p>
-<p>End Date: <%= @campaign.end_date %></p>
+<table>
+  <thead>
+    <tr>
+      <th>Choice</th>
+      <th>Validity</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @campaign.votes.each do |vote| %>
+      <tr>
+      <%# to be fixed, it's shownig wrong campaign assigned to the candidate %>
+        <td><p><%= vote.choice %></p></td>
+        <td><p><%= vote.validity %> </p></td>
+        <td><p><%= vote.msisdn %> </p></td>
+      </tr>
+    <% end %>
+  </tbody>
