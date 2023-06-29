@@ -1,6 +1,13 @@
 <h1><%= @campaign.name %></h1>
-<h2>Invalid Votes: <%= @campaign.votes.where(validity: nil)&.count %></h2>
+<h2>Invalid Votes: <%= @campaign.votes.where.not(validity: "during")&.count %></h2>
+<% candidates = Candidate.where(campaign_id: @campaign.id) %>
+<% candidates.each do |candidate|  %>
 
+  <p>Candidate name: <%= candidate.name %></p>
+  <p>Votes: <%= candidate.votes.where(validity: "during")&.count %></p>
+  <br>
+<% end %>
+<%=  %>
 <table>
   <thead>
     <tr>
